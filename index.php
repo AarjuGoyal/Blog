@@ -17,18 +17,18 @@
     
 	    <div class="container">
 	      <label><b>Username</b></label>
-	      <input type="text" placeholder="Enter Username" name="uname" required>
+	      <input type="text" placeholder="Enter Username" name="username" required>
 	      </br> </br>
 	      <label><b>Password</b></label>
-	      <input type="password" placeholder="Enter Password" name="psw" required>
+	      <input type="password" placeholder="Enter Password" name="password" required>
 	        
-	      <input type="submit" name="submit" value="Login"  />
-	      <input type="checkbox" checked="checked"> Remember me
+	      <!-- <input type="submit" name="submit" value="Login"  /> -->
 	    </div>
 
 	    <div class="container" style="background-color:#f1f1f1">
 	      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-	      <span class="psw">Forgot <a href="#">password?</a></span>
+	      <button type="submit" class="loginbtn" id="login">Login</button>
+	      <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
 	    </div>
 
   		</form>
@@ -42,6 +42,10 @@
 	  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">X</span>
 	  <form name="signUpForm" class="modal-content animate" action="SignUpAction.php" method="post">
 	    <div class="container">
+	      <label><b>Name</b></label>
+	      <input type="text" placeholder="Enter Name" name="name" required>
+
+
 	      <label><b>Email</b></label>
 	      <input type="text" placeholder="Enter Email" name="email" required>
 

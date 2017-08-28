@@ -32,6 +32,7 @@ if ($dbSuccess) {
 	
 	{ //Collects all the information for Signup through POST
 
+		$Name = $_POST["name"];
 		$Email = $_POST["email"];
 		$Password = $_POST["password"];
 	}
@@ -41,12 +42,14 @@ if ($dbSuccess) {
 
 	{ //Forms the SQL Query for insertion
 		$SQL_insertUserInfo = "INSERT INTO BlogUsers ( ";
+		$SQL_insertUserInfo .= "Name, ";
 		$SQL_insertUserInfo .= "Email, ";
 		$SQL_insertUserInfo .= "Password ";
 		$SQL_insertUserInfo .= ") ";
 
 
 		$SQL_insertUserInfo .= "VALUES ( ";
+		$SQL_insertUserInfo .= "'".$Name."', ";
 		$SQL_insertUserInfo .= "'".$Email."', ";
 		$SQL_insertUserInfo .= "'".$Password."' ";
 		$SQL_insertUserInfo .= " )";
