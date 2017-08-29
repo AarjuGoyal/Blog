@@ -28,7 +28,7 @@ if ($dbSuccess) {
 	$Name = $_SESSION['SESS_FIRST_NAME'];
 	//$Password = $_SESSION['SESS_PASS'];
 
-
+	echo "Hello ".$Name;
 	echo "Member ID is ".$User_ID;
 	?>
 
@@ -62,9 +62,27 @@ if ($dbSuccess) {
 	</script>
 
 	<?php
-
 		
+	{//Script to display all the posts of the blogger
+		$query_displayAllPosts = "SELECT postID, postTitle, postDesc, postCont, postDate ";
+		$query_displayAllPosts .= "FROM BlogPosts ";
+		$query_displayAllPosts .= "WHERE Blogger_ID = ".$User_ID;
 
+		//echo "The query is ".$query_displayAllPosts;
+		if($result = mysqli_query($dbConnected,$query_displayAllPosts))
+		{
+			echo "All your posts ";
+			while($row = mysqli_fetch_row($result))
+			{
+				echo '<div>';
+		    	echo '<h1>'.$row[1].'</h1>';
+		    	echo '<p>Posted on '.date('jS M Y', strtotime($row[4])).'</p>';
+		    	echo '<p>'.$row[3].'</p>';                
+				echo '</div>';
+				echo '<button><a href="updatePost.php?id='.$row[0].'">'."Update".'</a></button>';			}
+		}
+
+	}
 }
 
 
