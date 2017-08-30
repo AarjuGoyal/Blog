@@ -25,7 +25,7 @@ echo "Admin Page";
 	}
 	if($dbSuccess)
 	{
-		$query_retrieveAllUsers = "SELECT User_ID, Name, Email, Role FROM BlogUsers ORDER BY Name";
+		$query_retrieveAllUsers = "SELECT User_ID, Name, Email, Role, Permission FROM BlogUsers ORDER BY Name";
 		//echo $query_retrieveAllUsers;
 		if ($result = mysqli_query($dbConnected,$query_retrieveAllUsers))
 		{
@@ -37,15 +37,34 @@ echo "Admin Page";
     			<td><?php echo $row[1]?></td>;
     			<td><?php echo $row[2]?></td>;
     			<td>
-        		<a href="userDeleteOrEdit.php?edit=<?php echo $row[0];?>">Edit</a> 
-        		<?php if($row[3] != 1)
+        			<a href="userDeleteOrEdit.php?edit=<?php echo $row[0];?>">Edit</a>
+        		</td>
+        		<?php 
+        		if($row[3] != 1)
         		{?>
-            	<a href="javascript:deluser('<?php echo $row[0];?>','<?php echo $row[1];?>')">Delete</a>
+	            	<td>
+	            		<a href="javascript:deluser('<?php echo $row[0];?>','<?php echo $row[1];?>')">Delete</a>
+	        		</td>
+	        		
         		<?php
-        		} ?>
-    			</td>
-    			
-    			<?php
+	        		if($row[4])
+	        		{
+	        			?>
+	        			<td>
+	        			<a href="userDeleteOrEdit.php?perm=0&id=<?php echo $row[0];?>">Deny Permission to Post</a>
+	        			</td>
+	        			<?php
+	        		}
+	        		else
+	        		{
+	        			?>
+	        			<td>
+	        			<a href="userDeleteOrEdit.php?perm=1&id=<?php echo $row[0];?>">Acess Permission to Post</a>
+	        			</td>
+	        			<?php
+	        		}
+        		}
+        		
     		}
 		}
 		

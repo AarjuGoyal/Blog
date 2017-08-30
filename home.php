@@ -23,46 +23,55 @@ session_start();
 
 if ($dbSuccess) {
 
-	echo "This is the homepage of the user";
+	echo "This is the homepage of the user<br/>";
 	$User_ID = $_SESSION['SESS_MEMBER_ID'];
 	$Name = $_SESSION['SESS_FIRST_NAME'];
 	//$Password = $_SESSION['SESS_PASS'];
 
-	echo "Hello ".$Name;
-	echo "Member ID is ".$User_ID;
+	echo "Hello ".$Name."<br/>";
+	//echo "Member ID is ".$User_ID;
+	$query_getPermission = "SELECT Permission FROM BlogUsers WHERE User_ID=".$User_ID;
+	$PerResult = mysqli_query($dbConnected,$query_getPermission);
+	$PerRow = mysqli_fetch_row($PerResult);
+	if($PerRow[0])
+	{
 	?>
 
-	<form action='submitPost.php' method='post'>
+		<form action='submitPost.php' method='post'>
 
-	    <p><label>Title</label><br />
-	    <input type='text' name='postTitle' value='<?php if(isset($error)){ echo $_POST['postTitle'];}?>'></p>
+		    <p><label>Title</label><br />
+		    <input type='text' name='postTitle' value='<?php if(isset($error)){ echo $_POST['postTitle'];}?>'></p>
 
-	    <p><label>Description</label><br />
-	    <textarea name='postDesc' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postDesc'];}?></textarea></p>
+		    <p><label>Description</label><br />
+		    <textarea name='postDesc' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postDesc'];}?></textarea></p>
 
-	    <p><label>Content</label><br />
-	    <textarea name='postCont' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postCont'];}?></textarea></p>
+		    <p><label>Content</label><br />
+		    <textarea name='postCont' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postCont'];}?></textarea></p>
 
-	    <p><input type='submit' name='submit' value='Submit'></p>
+		    <p><input type='submit' name='submit' value='Submit'></p>
 
-	</form>
+		</form>
 
 
-	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
-	<script>
-	        tinymce.init({
-	            selector: "textarea",
-	            plugins: [
-	                "advlist autolink lists link image charmap print preview anchor",
-	                "searchreplace visualblocks code fullscreen",
-	                "insertdatetime media table contextmenu paste"
-	            ],
-	            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
-	        });
-	</script>
+		<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+		<script>
+		        tinymce.init({
+		            selector: "textarea",
+		            plugins: [
+		                "advlist autolink lists link image charmap print preview anchor",
+		                "searchreplace visualblocks code fullscreen",
+		                "insertdatetime media table contextmenu paste"
+		            ],
+		            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+		        });
+		</script>
 
 	<?php
-		
+	}
+	else
+	{
+		echo "You have been denied permission to write further posts. Please Contact Admin<br/>";
+	}	
 	{//Script to display all the posts of the blogger
 		$query_displayAllPosts = "SELECT postID, postTitle, postDesc, postCont, postDate ";
 		$query_displayAllPosts .= "FROM BlogPosts ";

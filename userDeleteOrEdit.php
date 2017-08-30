@@ -132,6 +132,18 @@ if($dbSuccess)
 
 		}
 	}
+	if(isset($_GET['perm']))
+	{
+		$perm = $_GET['perm'];
+		$userID = $_GET['id'];
+		$query_ChangePerm = "UPDATE BlogUsers SET Permission = ".$perm." WHERE User_ID = ".$userID;
+		if(mysqli_query($dbConnected,$query_ChangePerm))
+		{
+	    	echo "Permission Changed";
+	    	header('Location: adminUsers.php?action=PermChanged');
+    		exit;
+	    }
+	}
 }
 
 ?>
