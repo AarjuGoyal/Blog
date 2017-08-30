@@ -83,6 +83,8 @@ if ($dbSuccess) {
 		}
 
 	}
+
+	echo "<button><a href='logout.php'>Logout</button>";
 }
 
 
