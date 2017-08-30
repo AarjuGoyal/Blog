@@ -74,7 +74,15 @@ echo "Login page";
 				$_SESSION['SESS_FIRST_NAME'] = $member['Email'];
 				$_SESSION['SESS_PASS'] = $member['Password'];
 				session_write_close();
-				header("location: home.php");
+				if($member['Role'])
+				{
+					header("location: adminUsers.php");
+				}
+				else
+				{
+					header("location: home.php");
+				}
+				
 				exit();
 			}else {
 				//Login failed
