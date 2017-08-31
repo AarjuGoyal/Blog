@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <head>
 	<title>Blog</title>
@@ -5,68 +8,89 @@
 </head>
 
 <body>
+	<div class="headerBand">
+	<?php
+	if(isset($_SESSION['SESS_MEMBER_ID']))
+	{
+		?><button id="BasicButton">
+		<a href="home.php"><?php echo $_SESSION['SESS_FIRST_NAME']; ?></a>
+		</button>
+		<?php
+	}
+	else
+	{ ?>
 	
+		<!-- Login Button -->
+		<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" id="BasicButton">Login</button>
+
+		<div id="id01" class="modal">
+			<form name="loginForm" class="modal-content animate" action="loginAction.php" method="post">
+	    
+		    <div class="container">
+		      <label><b>Username</b></label>
+		      <input type="text" placeholder="Enter Username" name="username" required>
+		      </br> </br>
+		      <label><b>Password</b></label>
+		      <input type="password" placeholder="Enter Password" name="password" required>
+		        
+		      <!-- <input type="submit" name="submit" value="Login"  /> -->
+		    </div>
+
+		    <div class="container" style="background-color:#f1f1f1">
+		      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+		      <button type="submit" class="loginbtn" id="login">Login</button>
+		      <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
+		    </div>
+
+	  		</form>
+		</div>
+
+
+		<!-- SignUp Button -->
+		<button onclick="document.getElementById('id02').style.display='block'" style="width:auto;" id="BasicButton">Sign Up</button>
+
+		<div id="id02" class="modal">
+		  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">X</span>
+		  <form name="signUpForm" class="modal-content animate" action="SignUpAction.php" method="post">
+		    <div class="container">
+		      <label><b>Name</b></label>
+		      <input type="text" placeholder="Enter Name" name="name" required>
+
+
+		      <label><b>Email</b></label>
+		      <input type="text" placeholder="Enter Email" name="email" required>
+
+		      <label><b>Password</b></label>
+		      <input type="password" placeholder="Enter Password" name="password" onkeyup='check();'id="password" required>
+
+		      <label><b>Repeat Password</b></label>
+		      <input type="password" placeholder="Repeat Password" id="confirm_password" onkeyup='check();' required>
+		      <span id='message'></span>
+
+		      <?php 
+	    		if(isset($msg)){  // Check if $msg is not empty
+	        		echo '<div>'.$msg.'</div>'; // Display our message and wrap it with a div with the class "statusmsg".
+	    		} 
+			  ?>
+		      <!-- <input type="checkbox" checked="checked"> Remember me -->
+		      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+
+		      <div class="clearfix">
+		        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+		        <button type="submit" class="signupbtn" id="signup" disabled>Sign Up</button>
+		      </div>
+		    </div>
+		  </form>
+		</div>
+		<?php
+	}
+	?>
+	</div>
+	<div id="banner">
 	<div class="heading1">
-		Welcome to Polar Bear Blog
+		Blog
 	</div>
-	<!-- Login Button -->
-	<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-
-	<div id="id01" class="modal">
-		<form name="loginForm" class="modal-content animate" action="loginAction.php" method="post">
-    
-	    <div class="container">
-	      <label><b>Username</b></label>
-	      <input type="text" placeholder="Enter Username" name="username" required>
-	      </br> </br>
-	      <label><b>Password</b></label>
-	      <input type="password" placeholder="Enter Password" name="password" required>
-	        
-	      <!-- <input type="submit" name="submit" value="Login"  /> -->
-	    </div>
-
-	    <div class="container" style="background-color:#f1f1f1">
-	      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-	      <button type="submit" class="loginbtn" id="login">Login</button>
-	      <!-- <span class="psw">Forgot <a href="#">password?</a></span> -->
-	    </div>
-
-  		</form>
 	</div>
-
-
-	<!-- SignUp Button -->
-	<button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
-
-	<div id="id02" class="modal">
-	  <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">X</span>
-	  <form name="signUpForm" class="modal-content animate" action="SignUpAction.php" method="post">
-	    <div class="container">
-	      <label><b>Name</b></label>
-	      <input type="text" placeholder="Enter Name" name="name" required>
-
-
-	      <label><b>Email</b></label>
-	      <input type="text" placeholder="Enter Email" name="email" required>
-
-	      <label><b>Password</b></label>
-	      <input type="password" placeholder="Enter Password" name="password" onkeyup='check();'id="password" required>
-
-	      <label><b>Repeat Password</b></label>
-	      <input type="password" placeholder="Repeat Password" id="confirm_password" onkeyup='check();' required>
-	      <span id='message'></span>
-	      <!-- <input type="checkbox" checked="checked"> Remember me -->
-	      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-
-	      <div class="clearfix">
-	        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
-	        <button type="submit" class="signupbtn" id="signup" disabled>Sign Up</button>
-	      </div>
-	    </div>
-	  </form>
-	</div>
-
-
 
 	<script>
 	// Get the modal for login
@@ -108,7 +132,7 @@
 	</script>
 	<?php
 
-		echo "All the posts";
+		//echo "All the posts";
 		{ 		//	Secure Connection Script
 			$hostname = 'localhost';
 			$username = 'root'; 
@@ -155,9 +179,76 @@
 
 
 		}
+
+		// if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) && !empty($_POST['email'])){
+  //       // Form Submited
+		// 	$name = mysql_escape_string($_POST['name']); // Turn our post into a local variable
+  //   		$email = mysql_escape_string($_POST['email']); // Turn our post into a local variable
+  //   		if(!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$", $email)){
+  //   			// Return Error - Invalid Email
+  //   			$msg = 'The email you have entered is invalid, please try again.';
+		// 	} else {
+  //   			// Return Success - Valid Email
+  //   			$msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
+		// 	}
+  //   	}
+    	{//Displaying all the authors
+    		$query_AllBloggers = "SELECT User_ID,Name FROM BlogUsers WHERE Role IS NOT true";
+    		if($result= mysqli_query($dbConnected,$query_AllBloggers))
+    		{
+    			echo "All the authors";
+    			?>
+    			<div class="author">
+    			<?php
+    			while($row=mysqli_fetch_row($result))
+    			{
+    				echo "</br>";
+    				echo '<p><a href="viewUser.php?id='.$row[0].'">'.$row[1].'</a></p>';
+    			}
+    			?>
+    			</div>
+    			<?php
+    		}
+
+    	}
 		mysqli_close($dbConnected);
 
 	?>
+	<?php
+	// $action=$_REQUEST['action'];
+	/*if ($action=="")     display the contact form 
+	{
+	    ?>
+	    <!-- <form  action="" method="POST" enctype="multipart/form-data">
+	    <input type="hidden" name="action" value="submit">
+	    Your name:<br>
+	    <input name="name" type="text" value="" size="30"/><br>
+	    Your email:<br>
+	    <input name="email" type="text" value="" size="30"/><br>
+	    Your message:<br>
+	    <textarea name="message" rows="7" cols="30"></textarea><br>
+	    <input type="submit" value="Send email"/>
+	    </form> -->
+	    <?php
+	} 
+	else                /* send the submitted data
+	{
+	    $name=$_REQUEST['name'];
+	    $email=$_REQUEST['email'];
+	    $message=$_REQUEST['message'];
+	    if (($name=="")||($email=="")||($message==""))
+	    {
+			echo "All fields are required, please fill <a href=\"\">the form</a> again.";
+		}
+	    else
+	    {		
+		    $from="From: $name<$email>\r\nReturn-path: $email";
+	        $subject="Message sent using your contact form";
+			// mail("youremail@yoursite.com", $subject, $message, $from);
+			echo "Email sent!";
+		}
+	}  */
+?>
 </body>
 
 </html>

@@ -1,9 +1,34 @@
+body {
+    background-image: url('background15.jpg');
+}
+#banner {
+    background-image:url('background11.jpg'); 
+    width:100%;
+    min-height:650px;
+    text-align: center;
+}
 div.heading1 {
-	color: red;
+	color: white;
+    font-family: cursive;
+    font-size: 70px;
+    padding-top: 10%;
 }
 
-input[type=text], input[type=password] {
+.headerBand {
+    background-image:url('background14.jpg'); 
+    width: 100%; 
+    max-height: 100px;
+    text-align: right;
+}
+
+.author {
     width: 100%;
+    background-color: #01c9ca;
+    right: 70%;
+
+}
+input[type=text], input[type=password] {
+    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -13,7 +38,7 @@ input[type=text], input[type=password] {
 
 
 button {
-    background-color: #4CAF50;
+    background-color: #010742;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -27,7 +52,22 @@ button:hover {
 }
 
 .container {
-    padding: 16px;
+    padding: 10px;
+    text-align: left;
+
+}
+
+#BasicButton {
+    border: 5px solid white;
+    text-align: center;
+    background-color: transparent;
+    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-decoration: underline;
+    font: 15px Comic;
+    margin-right: 10px;
+
 }
 
 
@@ -36,9 +76,9 @@ button:hover {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    left: 0;
+    left: 25%;
     top: 0;
-    width: 100%; /* Full width */
+    width: 50%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
@@ -48,7 +88,7 @@ button:hover {
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-image: url('background1.jpg');
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */

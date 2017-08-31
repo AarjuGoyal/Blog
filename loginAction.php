@@ -80,6 +80,7 @@ echo "Login page";
 				}
 				else
 				{
+					//echo "Normal User";
 					header("location: home.php");
 				}
 				
