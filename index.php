@@ -12,7 +12,7 @@ session_start();
 	<?php
 	if(isset($_SESSION['SESS_MEMBER_ID']))
 	{
-		?><button id="BasicButton">
+		?><button id="BasicButton" style="width:auto;">
 		<a href="home.php"><?php echo $_SESSION['SESS_FIRST_NAME']; ?></a>
 		</button>
 		<?php
@@ -54,16 +54,22 @@ session_start();
 		  <form name="signUpForm" class="modal-content animate" action="SignUpAction.php" method="post">
 		    <div class="container">
 		      <label><b>Name</b></label>
+		  	</br>
 		      <input type="text" placeholder="Enter Name" name="name" required>
-
+		      <br/>
 
 		      <label><b>Email</b></label>
+		  </br>
 		      <input type="text" placeholder="Enter Email" name="email" required>
+		      </br>
 
 		      <label><b>Password</b></label>
+		  </br>
 		      <input type="password" placeholder="Enter Password" name="password" onkeyup='check();'id="password" required>
+		      </br>
 
 		      <label><b>Repeat Password</b></label>
+		  </br>
 		      <input type="password" placeholder="Repeat Password" id="confirm_password" onkeyup='check();' required>
 		      <span id='message'></span>
 
@@ -153,8 +159,34 @@ session_start();
 			//	END	Secure Connection Script
 		}
 
+
+
 		if($dbSuccess) {
-			$showPostQuery = "SELECT postID, postTitle, postDate FROM BlogPosts ORDER BY postID DESC";
+
+
+
+			{//Displaying all the authors
+	    		$query_AllBloggers = "SELECT User_ID,Name FROM BlogUsers WHERE Role IS NOT true";
+	    		if($result= mysqli_query($dbConnected,$query_AllBloggers))
+	    		{
+	    			
+	    			?>
+	    			<div class="author">
+	    			<?php
+	    			echo "<h2>All the authors</h2>";
+	    			while($row=mysqli_fetch_row($result))
+	    			{
+	    				echo "</br>";
+	    				echo '<p><a href="viewUser.php?id='.$row[0].'">'.$row[1].'</a></p>';
+	    			}
+	    			?>
+	    			</div>
+	    			<?php
+	    		}
+
+    		}
+
+			$showPostQuery = "SELECT postID, postTitle, postDate, postDesc FROM BlogPosts ORDER BY postID DESC";
 			//echo $showPostQuery;
 
 			if ($result=mysqli_query($dbConnected,$showPostQuery))
@@ -163,12 +195,16 @@ session_start();
 			  // Fetch one and one row
 			  while ($row=mysqli_fetch_row($result))
 			  {
-			    echo '<div>';
+			    ?>
+			    <div class="post">
+			   	<?php
                 echo '<h1><a href="viewpost.php?id='.$row[0].'">'.$row[1].'</a></h1>';
                 echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row[2])).'</p>';
-                //echo '<p>'.$row['postDesc'].'</p>';                
+                echo '<p>'.$row[3].'</p>';                
                 echo '<p><a href="viewpost.php?id='.$row[0].'">Read More</a></p>';                
-            	echo '</div>';
+            	?>
+            	</div>
+            	<?php
 			  }
 			  // Free result set
 			  mysqli_free_result($result);
@@ -192,25 +228,7 @@ session_start();
   //   			$msg = 'Your account has been made, <br /> please verify it by clicking the activation link that has been send to your email.';
 		// 	}
   //   	}
-    	{//Displaying all the authors
-    		$query_AllBloggers = "SELECT User_ID,Name FROM BlogUsers WHERE Role IS NOT true";
-    		if($result= mysqli_query($dbConnected,$query_AllBloggers))
-    		{
-    			echo "All the authors";
-    			?>
-    			<div class="author">
-    			<?php
-    			while($row=mysqli_fetch_row($result))
-    			{
-    				echo "</br>";
-    				echo '<p><a href="viewUser.php?id='.$row[0].'">'.$row[1].'</a></p>';
-    			}
-    			?>
-    			</div>
-    			<?php
-    		}
-
-    	}
+    	
 		mysqli_close($dbConnected);
 
 	?>

@@ -6,6 +6,7 @@ body {
     width:100%;
     min-height:650px;
     text-align: center;
+    z-index: 1;
 }
 div.heading1 {
 	color: white;
@@ -22,10 +23,23 @@ div.heading1 {
 }
 
 .author {
-    width: 100%;
+    width: 30%;
     background-color: #01c9ca;
-    right: 70%;
+    min-height: 1000%;
+    float: right;
+    position: relative;
+    margin-top: 50px;
 
+}
+
+.post {
+    background-color: #F0F8FF;
+    width: 40%;
+    margin-left: 15px;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 input[type=text], input[type=password] {
     width: 50%;
@@ -75,7 +89,7 @@ button:hover {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 2; /* Sit on top */
     left: 25%;
     top: 0;
     width: 50%; /* Full width */
@@ -119,5 +133,10 @@ button:hover {
     .cancelbtn {
        width: 100%;
     }
+}
+
+h2 {
+    color: white;
+
 }
 
