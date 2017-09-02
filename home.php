@@ -1,6 +1,12 @@
 <?php
 session_start();
-
+?>
+<!DOCTYPE html>
+<head>
+	<title>HomePage</title>
+	<link rel="stylesheet" type="text/css" href="UserPage.css">
+</head>
+<?php
 { 		//	Secure Connection Script
 		$hostname = 'localhost';
 		$username = 'root'; 
@@ -23,9 +29,17 @@ session_start();
 
 if ($dbSuccess) {
 
-	echo "This is the homepage of the user<br/>";
+	//echo "This is the homepage of the user<br/>";
 	$User_ID = $_SESSION['SESS_MEMBER_ID'];
 	$Name = $_SESSION['SESS_FIRST_NAME'];
+	?>
+	<div class="headerBand">
+		<button id="BasicButton" align="right" onClick="dummyPage.php">
+			<?php echo $_SESSION['SESS_FIRST_NAME']; ?>
+			
+		</button>
+	</div>
+	<?php
 	//$Password = $_SESSION['SESS_PASS'];
 
 	echo "Hello ".$Name."<br/>";
@@ -36,7 +50,10 @@ if ($dbSuccess) {
 	if($PerRow[0])
 	{
 	?>
+		<button id="myBtn">Write New Post</button>
 
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
 		<form action='submitPost.php' method='post'>
 
 		    <p><label>Title</label><br />
@@ -49,8 +66,10 @@ if ($dbSuccess) {
 		    <textarea name='postCont' cols='60' rows='10'><?php if(isset($error)){ echo $_POST['postCont'];}?></textarea></p>
 
 		    <p><input type='submit' name='submit' value='Submit'></p>
+		    <button type="button" onclick="document.getElementById('myModal').style.display='none'" class="cancelbtn">Cancel</button>
 
 		</form>
+	</div>
 
 
 		<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
@@ -64,6 +83,33 @@ if ($dbSuccess) {
 		            ],
 		            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
 		        });
+		</script>
+		<script>
+			// Get the modal
+			var modal = document.getElementById('myModal');
+
+			// Get the button that opens the modal
+			var btn = document.getElementById("myBtn");
+
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("close")[0];
+
+			// When the user clicks the button, open the modal 
+			btn.onclick = function() {
+			    modal.style.display = "block";
+			}
+
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
+			    modal.style.display = "none";
+			}
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+			    if (event.target == modal) {
+			        modal.style.display = "none";
+			    }
+			}
 		</script>
 
 	<?php
@@ -93,8 +139,12 @@ if ($dbSuccess) {
 
 	}
 
-	echo "<button><a href='logout.php'>Logout</button>";
+	echo "<button><a href='logout.php'>Logout</a></button>";
+	echo "<button><a href='index.php'>Go to index page</a></button>";
 }
 
 
+
 ?>
+
+</html>
