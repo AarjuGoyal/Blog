@@ -1,5 +1,9 @@
 body {
-    background-image: url('background15.jpg');
+    background: url('background2.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 #banner {
     background-image:url('background11.jpg'); 
@@ -40,6 +44,16 @@ div.heading1 {
     padding-left: 10px;
     padding-top: 2px;
     padding-bottom: 2px;
+}
+
+.bottomBand {
+    background-image: url('background14.jpg');
+    width: 95%;
+    max-height: 30%;
+    padding-left: 10px;
+    margin: 15px;
+    padding-right: 10px;
+
 }
 input[type=text], input[type=password] {
     width: 50%;

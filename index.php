@@ -233,24 +233,8 @@ session_start();
 
 	?>
 	<?php
-	// $action=$_REQUEST['action'];
-	/*if ($action=="")     display the contact form 
-	{
-	    ?>
-	    <!-- <form  action="" method="POST" enctype="multipart/form-data">
-	    <input type="hidden" name="action" value="submit">
-	    Your name:<br>
-	    <input name="name" type="text" value="" size="30"/><br>
-	    Your email:<br>
-	    <input name="email" type="text" value="" size="30"/><br>
-	    Your message:<br>
-	    <textarea name="message" rows="7" cols="30"></textarea><br>
-	    <input type="submit" value="Send email"/>
-	    </form> -->
-	    <?php
-	} 
-	else                /* send the submitted data
-	{
+	/*if(isset($_POST['submit']))           //send the submitted data
+    {
 	    $name=$_REQUEST['name'];
 	    $email=$_REQUEST['email'];
 	    $message=$_REQUEST['message'];
@@ -260,12 +244,32 @@ session_start();
 		}
 	    else
 	    {		
-		    $from="From: $name<$email>\r\nReturn-path: $email";
-	        $subject="Message sent using your contact form";
-			// mail("youremail@yoursite.com", $subject, $message, $from);
-			echo "Email sent!";
+		    
+		    $query_submitMessage = "INSERT INTO ContactUs (AuthorName,AuthorEmail,QueryCont) VALUES (";
+		    $query_submitMessage .= "'".$name."', ";
+		    $query_submitMessage .= "'".$email."', ";
+		    $query_submitMessage .= "'".$message."' )";
+			echo $query_submitMessage;
+			if(mysqli_query($dbConnected,$query_submitMessage))
+			{
+				//header('location: dummyPage.php');
+			}
 		}
-	}  */
+  	}*/	
+    ?>
+    <form  action="contactUs.php" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="action" value="submit">
+    Your name:<br>
+    <input name="name" type="text" value="" size="30"/><br>
+    Your email:<br>
+    <input name="email" type="text" value="" size="30"/><br>
+    Your message:<br>
+    <textarea name="message" rows="7" cols="30"></textarea><br>
+    <input type="submit" value="Send Message"/>
+    </form>
+    <?php
+	
+    
 ?>
 </body>
 
