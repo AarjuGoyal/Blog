@@ -81,7 +81,7 @@ echo "Login page";
 				else
 				{
 					//echo "Normal User";
-					header("location: home.php");
+					header("location: index.php");
 				}
 				
 				exit();

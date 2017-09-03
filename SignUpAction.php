@@ -60,10 +60,16 @@ if ($dbSuccess) {
 	{ //Running the MySQL query
 		if(mysqli_query($dbConnected,$SQL_insertUserInfo)) {
 			echo "Signup SUCCESFUL";
+			header('location: index.php');
+			exit();
 
 		}
 		else
+		{
 			echo "Signup FAILED";
+			header('location: index.php');
+			exit();
+		}	
 
 	}
 }
