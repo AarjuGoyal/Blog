@@ -141,6 +141,27 @@ if ($dbSuccess) {
 
 	echo "<button><a href='logout.php'>Logout</a></button>";
 	echo "<button><a href='index.php'>Go to index page</a></button>";
+
+
+	?>
+	<div class="Notification">
+		<?php
+			echo "Notifications";
+			$query_getNotification = "SELECT B.postTitle,B.postDate, B.postDesc, U.Name FROM Follow F, BlogPosts B, BlogUsers U Where F.Follower_ID = ".$User_ID." and B.Blogger_ID = F.Blogger_ID and U.User_ID = B.Blogger_ID ORDER BY B.postDate DESC";
+			//echo $query_getNotification;
+			if($result = mysqli_query($dbConnected,$query_getNotification))
+			{
+				while($row = mysqli_fetch_row($result))
+				{
+					echo $row[3]." posted on ".$row[0]." on ".$row[1]."</br>";
+					echo "Description: ".$row[2];
+					echo "</br>";
+				}
+
+			}
+		?>
+	</div>
+	<?php
 }
 
 
