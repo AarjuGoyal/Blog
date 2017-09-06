@@ -9,6 +9,11 @@ session_start();
 
 <body>
 	<div class="headerBand">
+
+		<form method="post" action="search.php" float="left" align= "left">
+        	<input type="text" name="search" placeholder="Search">
+        	<input type="submit" value="Submit">
+    	</form>
 	<?php
 	if(isset($_SESSION['SESS_MEMBER_ID']))
 	{
@@ -257,16 +262,19 @@ session_start();
 		}
   	}*/	
     ?>
+    <div class="bottomBand">
+    	<h2>Contact Us</h2>
     <form  action="contactUs.php" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="action" value="submit">
     Your name:<br>
-    <input name="name" type="text" value="" size="30"/><br>
+    <input name="name" type="text" value="" size="15"/><br>
     Your email:<br>
-    <input name="email" type="text" value="" size="30"/><br>
+    <input name="email" type="text" value="" size="15"/><br>
     Your message:<br>
     <textarea name="message" rows="7" cols="30"></textarea><br>
     <input type="submit" value="Send Message"/>
     </form>
+	</div>
     <?php
 	
     
