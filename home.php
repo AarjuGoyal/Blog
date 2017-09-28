@@ -117,8 +117,29 @@ if ($dbSuccess) {
 	else
 	{
 		echo "You have been denied permission to write further posts. Please Contact Admin<br/>";
-	}	
+	}
+	?>
+	<div class="Notification">
+		<?php
+			echo "<h2>Notifications</h2>";
+			$query_getNotification = "SELECT B.postTitle,B.postDate, B.postDesc, U.Name FROM Follow F, BlogPosts B, BlogUsers U Where F.Follower_ID = ".$User_ID." and B.Blogger_ID = F.Blogger_ID and U.User_ID = B.Blogger_ID ORDER BY B.postDate DESC";
+			//echo $query_getNotification;
+			if($result = mysqli_query($dbConnected,$query_getNotification))
+			{
+				while($row = mysqli_fetch_row($result))
+				{
+					echo $row[3]." posted on ".$row[0]." on ".$row[1]."</br>";
+					echo "Description: ".$row[2];
+					echo "</br></br>";
+				}
+
+			}
+		?>
+	</div>
+	<?php	
 	{//Script to display all the posts of the blogger
+		
+		echo "</br></br>";
 		$query_displayAllPosts = "SELECT postID, postTitle, postDesc, postCont, postDate ";
 		$query_displayAllPosts .= "FROM BlogPosts ";
 		$query_displayAllPosts .= "WHERE Blogger_ID = ".$User_ID;
@@ -129,39 +150,28 @@ if ($dbSuccess) {
 			echo "All your posts ";
 			while($row = mysqli_fetch_row($result))
 			{
-				echo '<div>';
-		    	echo '<h1>'.$row[1].'</h1>';
-		    	echo '<p>Posted on '.date('jS M Y', strtotime($row[4])).'</p>';
-		    	echo '<p>'.$row[3].'</p>';                
-				echo '</div>';
-				echo '<button><a href="updatePost.php?id='.$row[0].'">'."Update".'</a></button>';			}
+				?>
+				<div class="post">
+			   	<?php
+                echo '<h1><a href="viewpost.php?id='.$row[0].'">'.$row[1].'</a></h1>';
+                echo '<p>Posted on '.date('jS M Y H:i:s', strtotime($row[4])).'</p>';
+                echo '<p>'.$row[2].'</p>';                
+                echo '<p><a href="viewpost.php?id='.$row[0].'">Read More</a></p>';                
+            	?>
+            	</div>
+				<?php
+				echo '<button><a href="updatePost.php?id='.$row[0].'">'."Update".'</a></button>';	
+			}
+
+		  mysqli_free_result($result);
+
 		}
 
 	}
-
+	echo '</br></br>';
 	echo "<button><a href='logout.php'>Logout</a></button>";
 	echo "<button><a href='index.php'>Go to index page</a></button>";
 
-
-	?>
-	<div class="Notification">
-		<?php
-			echo "Notifications";
-			$query_getNotification = "SELECT B.postTitle,B.postDate, B.postDesc, U.Name FROM Follow F, BlogPosts B, BlogUsers U Where F.Follower_ID = ".$User_ID." and B.Blogger_ID = F.Blogger_ID and U.User_ID = B.Blogger_ID ORDER BY B.postDate DESC";
-			//echo $query_getNotification;
-			if($result = mysqli_query($dbConnected,$query_getNotification))
-			{
-				while($row = mysqli_fetch_row($result))
-				{
-					echo $row[3]." posted on ".$row[0]." on ".$row[1]."</br>";
-					echo "Description: ".$row[2];
-					echo "</br>";
-				}
-
-			}
-		?>
-	</div>
-	<?php
 }
 
 

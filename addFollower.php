@@ -29,5 +29,6 @@ if ($dbSuccess) {
 	if(mysqli_query($dbConnected,$query_addFollwer)) {
 		echo "followed";
 	}
+	header("Location: viewUser.php");
 }
 ?>
