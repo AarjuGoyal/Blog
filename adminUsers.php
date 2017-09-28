@@ -1,6 +1,23 @@
 <?php
 
 session_start();
+?>
+<!DOCTYPE html>
+<head>
+	<title>
+		Admin Page
+	</title>
+	<link rel="stylesheet" type="text/css" href="AdminPage.css">
+</head>
+<div class="headerBand">
+		<button id="BasicButton" align="right" onClick="dummyPage.php">
+			<?php echo $_SESSION['SESS_FIRST_NAME']; ?>	
+		</button>
+		<button id="BasicButton" align="right">
+			<a href='logout.php'>Logout</a>
+		</button>
+</div>	
+<?php
 echo "Admin Page";
 
 
@@ -29,43 +46,60 @@ echo "Admin Page";
 		//echo $query_retrieveAllUsers;
 		if ($result = mysqli_query($dbConnected,$query_retrieveAllUsers))
 		{
+			?>
+			<table>
+				<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Edit</th>
+				<th>Delete</th>
+				<th>Change Permission</th>
+				</tr>
+			<?php
+
 			while($row = mysqli_fetch_row($result))
 			{
 				?>
 				<br/>
 				<tr>
-    			<td><?php echo $row[1]?></td>;
-    			<td><?php echo $row[2]?></td>;
-    			<td>
-        			<a href="userDeleteOrEdit.php?edit=<?php echo $row[0];?>">Edit</a>
-        		</td>
-        		<?php 
-        		if($row[3] != 1)
-        		{?>
-	            	<td>
-	            		<a href="javascript:deluser('<?php echo $row[0];?>','<?php echo $row[1];?>')">Delete</a>
+	    			<td><?php echo $row[1]?></td>
+	    			<td><?php echo $row[2]?></td>
+	    			<td>
+	        			<a href="userDeleteOrEdit.php?edit=<?php echo $row[0];?>">Edit</a>
 	        		</td>
-	        		
+	        		<?php 
+	        		if($row[3] != 1)
+	        		{	?>
+		            	<td>
+		            		<a href="javascript:deluser('<?php echo $row[0];?>','<?php echo $row[1];?>')">Delete</a>
+		        		</td>
+		        		
+		        		<?php
+			        		if($row[4])
+			        		{
+			        			?>
+			        			<td>
+			        			<a href="userDeleteOrEdit.php?perm=0&id=<?php echo $row[0];?>">Deny Permission to Post</a>
+			        			</td>
+			        			<?php
+			        		}
+			        		else
+			        		{
+			        			?>
+			        			<td>
+			        			<a href="userDeleteOrEdit.php?perm=1&id=<?php echo $row[0];?>">Acess Permission to Post</a>
+			        			</td>
+			        			<?php
+			        		}
+	        		}
+	        		?>
+        		</tr>
         		<?php
-	        		if($row[4])
-	        		{
-	        			?>
-	        			<td>
-	        			<a href="userDeleteOrEdit.php?perm=0&id=<?php echo $row[0];?>">Deny Permission to Post</a>
-	        			</td>
-	        			<?php
-	        		}
-	        		else
-	        		{
-	        			?>
-	        			<td>
-	        			<a href="userDeleteOrEdit.php?perm=1&id=<?php echo $row[0];?>">Acess Permission to Post</a>
-	        			</td>
-	        			<?php
-	        		}
-        		}
         		
     		}
+    		?>
+    		</table>
+    		<?php
 		}
 		
 		?>
@@ -79,10 +113,40 @@ echo "Admin Page";
   			}
 		}
 		</script>
+		<br/><br/><br/><br/>
 		<?php
 		
 
+		$query_retrieveAllMessages = "SELECT * FROM ContactUs";
+		if($result = mysqli_query($dbConnected,$query_retrieveAllMessages))
+		{
+			?>
+			<table id="table">
+				<tr>
+					<th>QueryNo.</th>
+					<th>Name</th>
+					<th>EmailID</th>
+					<th>Message</th>
+					<th>Delete</th>
+					<th>Reply</th>
+				</tr>
+			<?php
+				while($row = mysqli_fetch_row($result))
+				{
+					?>
+					<tr>
+						<td><?php echo $row[0]?></td>
+						<td><?php echo $row[1]?></td>
+						<td><?php echo $row[2]?></td>
+						<td><?php echo $row[3]?></td>
+						<td><a href='userDeleteOrEdit.php?contactDel=<?php echo $row[0]?>'>Delete</a></td>
+						<td><a>Reply</a></td>
+					</tr>
+					<?php
+				}
+		}
+
 	}
-echo "<button><a href='logout.php'>Logout</button>";
+
 
 ?>

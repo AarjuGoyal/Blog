@@ -144,6 +144,20 @@ if($dbSuccess)
     		exit;
 	    }
 	}
+
+	if(isset($_GET['contactDel']))
+	{
+
+		$deleteContact = $_GET['contactDel'];
+		$query_DeleteContactMe = "DELETE FROM ContactUs WHERE QueryID =".$deleteContact;
+		if(mysqli_query($dbConnected,$query_DeleteContactMe))
+		{
+			echo "Contact Deleted";
+			header('Location: adminUsers.php?action=deleted');
+    		exit;
+		}
+
+	}
 }
 
 ?>
