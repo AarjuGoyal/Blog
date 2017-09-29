@@ -1,4 +1,12 @@
 <?php
+session_start();
+?>
+<!DOCTYPE html>
+<head>
+		<link rel="stylesheet" type="text/css" href="RegularPage.css">
+</head>
+<?php
+
 
 { 		//	Secure Connection Script
 		$hostname = 'localhost';
@@ -40,7 +48,7 @@ if ($dbSuccess) {
     }
 */
 
-	$showPostQuery = "SELECT postID, postTitle, postCont, postDate FROM BlogPosts WHERE postID=".$postID;
+	$showPostQuery = "SELECT postID, postTitle, postCont, postDate, Likes FROM BlogPosts WHERE postID=".$postID;
 	//echo $showPostQuery;
 
 	$result = mysqli_query($dbConnected,$showPostQuery);
@@ -52,21 +60,53 @@ if ($dbSuccess) {
 	        echo '<div>';
 		    echo '<h1>'.$row['postTitle'].'</h1>';
 		    echo '<p>Posted on '.date('jS M Y', strtotime($row['postDate'])).'</p>';
-		    echo '<p>'.$row['postCont'].'</p>';                
+		    echo '<p>'.$row['postCont'].'</p>';   
+		    echo '</br></br>';
+		    echo $row['Likes'].' Likes';             
 			echo '</div>';
 		
 
-		echo "<br/>";
-		//$show_AllComments = "SELECT commentCont, AuthorName FROM Comment WHERE PostID =".$postID." ORDER BY Date";
-		echo $show_AllComments;
+		//echo "<br/>";
+
+		
+
+		if(isset($_SESSION['SESS_MEMBER_ID']))
+		{
+			?>
+			<form method="POST">
+				<input type="image" src="like2.png" name="Like" value="like" alt="Like" width="30" height="30">
+			</form>
+			<?php
+
+			if(isset($_POST['Like']))
+			{
+				$query_Like = "Update BlogPosts SET Likes = Likes + 1 WHERE postID =".$postID;
+				//echo $query_Like;
+				if($result = mysqli_query($dbConnected,$query_Like))
+				{
+					echo "Liked";
+					header("Refresh:0");
+				}
+
+
+			}
+		}
+
+		$show_AllComments = "SELECT commentCont, AuthorName FROM Comment WHERE PostID =".$postID." ORDER BY Date";
+		//echo $show_AllComments;
 		if($result = mysqli_query($dbConnected,$show_AllComments))
 		{
-			$row = mysqli_fetch_assoc($result);
-			echo "<div>";
-			echo "<br/>".$row['commentCont'];
-			echo "<br/>Written By: ".$row['AuthorName'];
-			echo "</div>";
+			while ($row = mysqli_fetch_assoc($result))
+			{
+				echo "<div>";
+				echo "<br/>".$row[0];
+				echo "<br/>Written By: ".$row[1];
+				echo "</div>";
+			}
 		}
+
+
+
 		?>
 		<br/><br/>
 		<h3>Comment On this Post</h3>
