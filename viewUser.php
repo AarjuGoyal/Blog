@@ -7,6 +7,8 @@
 	</title>
 	<link rel="stylesheet" type="text/css" href="UserPage.css">
 </head>
+
+<button id="BasicButton"><a href='index.php'>Go to index page</a></button><br/>
 <?php
 session_start();
 { 		//	Secure Connection Script
@@ -35,9 +37,18 @@ if ($dbSuccess) {
 	{
 		if($_SESSION['SESS_MEMBER_ID'] != $User_ID)
 		{
-		?>
-		<button id='BasicButton'><a href='dummyPage.php?id=<?php echo $User_ID?>'>Follow</a></button>
-		<?php
+			$query_findFollow = "SELECT * FROM Follow WHERE Blogger_ID=".$User_ID." AND Follower_ID=".$_SESSION['SESS_MEMBER_ID'];
+			//echo $query_findFollow;
+			if(mysqli_num_rows(mysqli_query($dbConnected,$query_findFollow)) == 0)
+			{
+				?><button id='BasicButton'><a href='addFollower.php?id=<?php echo $User_ID?>'>Follow</a></button><?php
+			}
+			else
+			{
+				?>
+				<button id='BasicButton'>Following</button>
+				<?php
+			}
 		}
 	}
 	{//Script to display all the posts of the blogger
@@ -60,8 +71,11 @@ if ($dbSuccess) {
 		}
 
 	}
-	
 
+	?>
+	
+	
+	<?php
 
 }
 
