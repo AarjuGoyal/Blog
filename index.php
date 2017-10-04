@@ -32,8 +32,8 @@ session_start();
 			<form name="loginForm" class="modal-content animate" action="loginAction.php" method="post">
 	    
 		    <div class="container">
-		      <label><b>Username</b></label>
-		      <input type="text" placeholder="Enter Username" name="username" required>
+		      <label><b>Email </t>   </b></label>
+		      <input type="text" placeholder="Enter Email" name="username" required>
 		      </br> </br>
 		      <label><b>Password</b></label>
 		      <input type="password" placeholder="Enter Password" name="password" required>
@@ -100,6 +100,9 @@ session_start();
 	<div id="banner">
 	<div class="heading1">
 		Blog
+		<br/>
+		Write. Read. Explore.
+		<br/>	
 	</div>
 	</div>
 

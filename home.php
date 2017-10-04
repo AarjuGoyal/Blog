@@ -34,9 +34,10 @@ if ($dbSuccess) {
 	$Name = $_SESSION['SESS_FIRST_NAME'];
 	?>
 	<div class="headerBand">
+		<button id='BasicButton' align="left"><a href='logout.php'>Logout</a></button>
+		<button id='BasicButton'><a href='index.php'>Go to index page</a></button>
 		<button id="BasicButton" align="right" onClick="dummyPage.php">
 			<?php echo $_SESSION['SESS_FIRST_NAME']; ?>
-			
 		</button>
 	</div>
 	<?php
@@ -160,7 +161,7 @@ if ($dbSuccess) {
             	?>
             	</div>
 				<?php
-				echo '<button><a href="updatePost.php?id='.$row[0].'">'."Update".'</a></button>';	
+				echo '<button class="BasicButton"><a href="updatePost.php?id='.$row[0].'">'."Update".'</a></button>';	
 			}
 
 		  mysqli_free_result($result);
@@ -169,9 +170,7 @@ if ($dbSuccess) {
 
 	}
 	echo '</br></br>';
-	echo "<button><a href='logout.php'>Logout</a></button>";
-	echo "<button><a href='index.php'>Go to index page</a></button>";
-
+	
 }
 
 

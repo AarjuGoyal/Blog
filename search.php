@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="RegularPage.css">
+</head>
 <?php
 { 		//	Secure Connection Script
 		$hostname = 'localhost';
