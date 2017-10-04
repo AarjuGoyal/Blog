@@ -1,12 +1,12 @@
 body {
-    background: url('background2.jpg') no-repeat center center fixed;
+    background: url('background3.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 #banner {
-    background-image:url('background11.jpg'); 
+    background-image:url('background4.png'); 
     width:100%;
     min-height:650px;
     text-align: center;
@@ -20,10 +20,12 @@ div.heading1 {
 }
 
 .headerBand {
-    background-image:url('background14.jpg'); 
-    width: 100%; 
+    background-image:url('background4.png'); 
+    width: 97.2%; 
     max-height: 100px;
     text-align: right;
+    padding-left: 19px;
+    padding-right: 19px;
 }
 
 .author {
@@ -33,6 +35,8 @@ div.heading1 {
     float: right;
     position: relative;
     margin-top: 50px;
+    
+    text-align: center;
 
 }
 
@@ -47,12 +51,13 @@ div.heading1 {
 }
 
 .bottomBand {
-    background-image: url('background14.jpg');
+    background-image: url('background4.png');
     width: 95%;
     max-height: 30%;
     padding-left: 10px;
     margin: 15px;
     padding-right: 10px;
+    padding-bottom: 5px;
 
 }
 input[type=text], input[type=password] {
@@ -152,5 +157,16 @@ button:hover {
 h2 {
     color: white;
 
+}
+input[type=submit] {
+    border: 2px solid white;
+    text-align: center;
+    background-color: transparent;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-decoration: underline;
+    font: 15px Comic;
+    
 }
 

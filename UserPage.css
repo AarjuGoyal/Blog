@@ -6,7 +6,7 @@ body {
     background-size: cover;
 }
 div.headerBand {
-    background-image:url('background14.jpg'); 
+    background-image:url('background4.png'); 
     width: 100%; 
     max-height: 100px;
     text-align: right;
@@ -81,4 +81,28 @@ div.headerBand {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+input[type=submit] [type=button] {
+    border: 2px solid white;
+    text-align: center;
+    background-color: transparent;
+    padding: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    text-decoration: underline;
+    font: 15px Comic;
+    
+}
+
+button.BasicButton {
+    border: 5px solid white;
+    text-align: center;
+    background-color: white;
+    padding-right: 20px;
+    padding-left: 20px;
+    text-decoration: underline;
+    font: 15px Comic;
+    margin-right: 35px;
+    margin: 10px;
+
 }
